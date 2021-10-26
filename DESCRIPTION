@@ -13,4 +13,5 @@ Imports:
     tm,
     quanteda,
     doc2concrete,
-    dplyr
+    dplyr,
+    magrittr

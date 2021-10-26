@@ -1,6 +1,6 @@
-#
+# #
 # by_tur<-readRDS("by_turn_clean.RDS")
-# by_tur<-by_tur[1:1000,]
+# by_turn<-by_tur[1:5000,]
 #
 #
 # bt<-questionTypes(by_tur,
@@ -8,4 +8,6 @@
 #                   speakerID="Speaker",
 #                   convoID="DocName")
 #
-# dim(bt)
+# # dim(bt)
+#
+# library(dplyr)

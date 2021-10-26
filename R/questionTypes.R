@@ -7,7 +7,8 @@
 questionTypes<-function(by_turn,textcol="text",
                         speakerID="speakerID",
                         convoID="convoID"){
-  # add checks for the right columns
+
+  # checks for the right columns
 
   if(textcol!="text"){
     by_turn[,"text"]<-by_turn[,textcol]
@@ -38,15 +39,16 @@ questionTypes<-function(by_turn,textcol="text",
   Q<-1
   pb<-txtProgressBar(min=1,max=nrow(testQs))
   for(x in 1:nrow(by_turn)){
-    testQs[Q,"turn"]<-mark<-as.numeric(by_turn[x,"turn"])
     if(newQuestionSet[x]){
-      #testQs[Q,c("ID","groupID")]<-by_turn[x,c(speakerID,convoID)]
-      testQs[Q,]$ID<-by_turn[x,]$speakerID
-      testQs[Q,]$convoID<-by_turn[x,]$convoID
+      qb=((x-4):x)[((x-4):x)>0]
+      qblock<-by_turn[qb,c("convoID","turn","speakerID","text")]
+      theturn=qblock[nrow(qblock),]
+      qblock<-qblock[qblock$convoID==theturn$convoID,]
 
-      qblock<-by_turn %>%
-        filter(convoID==by_turn[x,]$convoID) %>%
-        filter(turn%in%((mark-4):mark))
+      testQs[Q,]$turn<-mark<-as.numeric(theturn$turn)
+
+      testQs[Q,]$ID<-theturn$speakerID
+      testQs[Q,]$convoID<-theturn$convoID
       qtext<-turn_join(qblock[qblock$turn==mark,"text"])
       testQs[Q,c("ques","Qpre","Qonly")]<-Q_start_split(qtext)
       testQs[Q,"prev1"]<-paste0(qblock[qblock$turn==(mark-1),"text"],collapse=". ")
