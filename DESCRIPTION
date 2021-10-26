@@ -1,0 +1,16 @@
+Package: dialogueActs
+Type: Package
+Title: Measures Question types from transcripts (for now)
+Version: 0.1.0
+Author: Mike Yeomans
+Maintainer: Mike Yeomans <mk.yeomans@gmail.com>
+Description: This is for replicating the follow-up question detector in Huang et al., 2017
+    Use four spaces when indenting paragraphs within the Description.
+License: MIT License
+Encoding: UTF-8
+LazyData: true
+Imports:
+    tm,
+    quanteda,
+    doc2concrete,
+    dplyr
